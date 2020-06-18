@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class RegistrationResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String userId;
+	private long userId;
 	
-	public String getUserId()
+	public long getUserId()
     {
         return userId;
     }
 
-    public void setUserId(String userId)
+    public void setUserId(long userId)
     {
         this.userId = userId;
     }
@@ -22,7 +22,7 @@ public class RegistrationResponse implements Serializable {
 
     }
 
-    public RegistrationResponse(String userId) {
+    public RegistrationResponse(long userId) {
         this.setUserId(userId);
     }
 
