@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
             .jdbcAuthentication()
             .usersByUsernameQuery(usersQuery)
+            .authoritiesByUsernameQuery("select email, role from user where email=?") //dummy query since authorization is not implememted
             .dataSource(dataSource)
             .passwordEncoder(bCryptPasswordEncoder);
     }
