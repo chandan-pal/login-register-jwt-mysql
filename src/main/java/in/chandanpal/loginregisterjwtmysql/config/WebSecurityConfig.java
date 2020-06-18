@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -33,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Value("${spring.queries.users-query}")
     private String usersQuery;
 	
+	@Autowired
+	private MyJwtFilter myJwtFilter;
+	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// Disable CSRF (cross site request forgery) because not using cookies
@@ -49,6 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/register").permitAll() //permit registration api to everyone
 				.antMatchers("/authenticate").permitAll() //permit authentication api to everyone
 				.anyRequest().authenticated();// everything else to authenticated users
+		
+		// Apply JWT Filter
+        httpSecurity.addFilterBefore(myJwtFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	
