@@ -1,7 +1,13 @@
 package in.chandanpal.loginregisterjwtmysql.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,6 +23,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder passwordEncoder () {
 		return new BCryptPasswordEncoder();
 	}
+	
+	@Autowired
+    private DataSource dataSource;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Value("${spring.queries.users-query}")
+    private String usersQuery;
 	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -34,5 +49,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/register").permitAll()//permit api authentication to everyone
 				.anyRequest().authenticated();// everything else to authenticated users
 	}
+	
+	
+	@Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+	
+	/**
+	 * configure authentication manager
+	 */
+	@Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+	{
+        auth
+            .jdbcAuthentication()
+            .usersByUsernameQuery(usersQuery)
+            .dataSource(dataSource)
+            .passwordEncoder(bCryptPasswordEncoder);
+    }
 	
 }
