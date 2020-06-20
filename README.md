@@ -2,7 +2,7 @@
   <br>
   
   <br>
-  login-register-jwt-mysql
+  login-register-jwt-mysql <img src="https://github.com/chandan-pal/login-register-jwt-mysql/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master" />
   <br>
 </h1>
 
