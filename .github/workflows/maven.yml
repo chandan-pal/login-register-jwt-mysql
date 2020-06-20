@@ -28,5 +28,3 @@ jobs:
         mysql password: ${{ secrets.MySQLRootPassword }}
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: publish package
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/chandan-pal -Dtoken=9c7d8f8afc6200001997208ef783027637c65dc1
