@@ -31,9 +31,11 @@ This is a Spring-boot authentication server application which authenticates a us
 This application can be used as a template to create a standalone common authetication servers
 
 features:
-  1. This application utilizes Spring Security to block all incoming requests without proper authentication and authorization. 
-  2. It uses jdbc authentication to validate/autheticate users from MySQL database and JPA - Java Persistence API.
-  3. It sends a 'Json Web Token' with first request to authentication url '/authenticate'.
-  2. additionaly, this application also applie a filter before every subsequent requests to validate the token if any in the request body.
+  1. This application utilizes Spring Security to block all incoming requests without proper authentication and authorization.
+  2. It provides api to register a new user and save the user in the database. url '/register'
+  3. It generates a new unique userId for every new user.
+  4. It uses jdbc authentication to validate/autheticate users from MySQL database and JPA - Java Persistence API.
+  5. It sends a 'Json Web Token' with first request to authentication url '/authenticate'.
+  6. Additionaly, this application also applie a filter before every subsequent requests to validate the token if any in the request body.
 
 
