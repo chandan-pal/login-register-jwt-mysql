@@ -72,5 +72,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<distributionManagement>
+	   <repository>
+	     <id>in.chandan-pal.login-register-jwt-mysql</id>
+	     <name>GitHub chandan-pal Apache Maven Packages</name>
+	     <url>https://maven.pkg.github.com/chandan-pal/login-register-jwt-mysql</url>
+	   </repository>
+	</distributionManagement>
 
 </project>
