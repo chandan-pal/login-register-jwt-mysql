@@ -35,7 +35,7 @@ features:
   2. It provides api to register a new user and save the user in the database. url '/register'
   3. It generates a new unique userId for every new user.
   4. It uses jdbc authentication to validate/autheticate users from MySQL database and JPA - Java Persistence API.
-  5. It sends a 'Json Web Token' with first request to authentication url '/authenticate'.
+  5. It generates a new signed JWT for any request to authentication url '/authenticate'. (only if the user credentials are valid).
   6. Additionaly, this application also applie a filter before every subsequent requests to validate the token if any in the request body.
 
 
