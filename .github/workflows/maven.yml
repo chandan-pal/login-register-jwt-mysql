@@ -20,5 +20,10 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Setup MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql database: passport
+        mysql root password: ${{ secrets.MySQLRootPassword }}
     - name: Build with Maven
       run: mvn -B package --file pom.xml
