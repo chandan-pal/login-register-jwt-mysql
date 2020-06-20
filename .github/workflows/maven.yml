@@ -24,7 +24,6 @@ jobs:
       uses: mirromutth/mysql-action@v1.1
       with:
         mysql database: passport
-        mysql root password: ${{ secrets.MySQLRootPassword }}
         mysql user:  dbasys
         mysql password: ${{ secrets.MySQLRootPassword }}
     - name: Build with Maven
