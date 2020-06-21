@@ -1,5 +1,7 @@
 package in.chandanpal.loginregisterjwtmysql.service;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +60,14 @@ public class AuthenticationService
         final User user = userService.findUserByEmail(authenticationRequest.getUserEmail());
         
         //generate token
-        final String jwtToken = jwtUtil.generateToken(user);
+        Date tokenExpDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
+        final String jwtToken = jwtUtil.generateToken(user, tokenExpDate);
         logger.debug("jwtToken=" + jwtToken);
         
+        AuthenticationResponse authResponse = new AuthenticationResponse(jwtToken);
+        authResponse.setExpDate(tokenExpDate);
         
-        return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
+        return ResponseEntity.ok(authResponse);
     }
     
 }

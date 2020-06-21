@@ -47,17 +47,17 @@ public class JwtUtil {
     }
     
     // generate a new token for a user
-    public String generateToken(User user)
+    public String generateToken(User user, Date expDate)
     {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, user.getEmail());
+        return createToken(claims, user.getEmail(), expDate);
     }
     
     // create token
-    private String createToken(Map<String, Object> claims, String subject)
+    private String createToken(Map<String, Object> claims, String subject, Date expDate)
     {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .setExpiration(expDate)
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
     
