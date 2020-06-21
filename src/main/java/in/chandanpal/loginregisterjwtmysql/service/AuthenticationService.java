@@ -20,7 +20,7 @@ import in.chandanpal.loginregisterjwtmysql.model.AuthenticationResponse;
 import in.chandanpal.loginregisterjwtmysql.model.User;
 import in.chandanpal.loginregisterjwtmysql.util.JwtUtil;
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin
 @RestController
 public class AuthenticationService
 {
