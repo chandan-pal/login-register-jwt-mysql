@@ -6,6 +6,7 @@ public class RegistrationResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private long userId;
+	private boolean error;
 	private String message;
 	
 	public long getUserId()
@@ -36,5 +37,15 @@ public class RegistrationResponse implements Serializable {
     public RegistrationResponse(long userId, String message) {
         this.setUserId(userId);
         this.setMessage(message);
+    }
+
+    public boolean isError()
+    {
+        return error;
+    }
+
+    public void setError(boolean error)
+    {
+        this.error = error;
     }
 }

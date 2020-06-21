@@ -41,7 +41,9 @@ public class RegistrationService {
         if (userExists != null)
         {
             long userId = userExists.getUserId();
-            return ResponseEntity.ok(new RegistrationResponse(userId, "User already exists!"));
+            RegistrationResponse response = new RegistrationResponse(userId, "User already exists!");
+            response.setError(true);
+            return ResponseEntity.ok(response);
         }
         else
         {
@@ -56,7 +58,9 @@ public class RegistrationService {
             newUser = userService.saveUser(newUser);
             
             long userId = newUser.getUserId();
-            return ResponseEntity.ok(new RegistrationResponse(userId, "New user registered!"));
+            RegistrationResponse response = new RegistrationResponse(userId, "New user registered!");
+            response.setError(false);
+            return ResponseEntity.ok(response);
         }
 	}
 }
