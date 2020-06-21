@@ -66,6 +66,8 @@ public class AuthenticationService
         
         AuthenticationResponse authResponse = new AuthenticationResponse(jwtToken);
         authResponse.setExpDate(tokenExpDate);
+        authResponse.setFirstName(user.getFirstName());
+        authResponse.setLastName(user.getLastName());
         
         return ResponseEntity.ok(authResponse);
     }
