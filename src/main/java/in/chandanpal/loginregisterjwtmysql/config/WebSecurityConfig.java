@@ -41,6 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// Disable CSRF (cross site request forgery) because not using cookies
 		httpSecurity.csrf().disable();
+	    
+		//enable cross-origin requests
+	    httpSecurity.cors();
 		
 		//disable session because using JWT authorization
 		httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
