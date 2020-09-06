@@ -2,7 +2,6 @@ package in.chandanpal.loginregisterjwtmysql.service;
 
 import java.util.HashMap;
 
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

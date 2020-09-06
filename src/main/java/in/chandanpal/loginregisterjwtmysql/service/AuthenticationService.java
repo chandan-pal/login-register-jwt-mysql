@@ -24,7 +24,7 @@ import in.chandanpal.loginregisterjwtmysql.util.JwtUtil;
 @RestController
 public class AuthenticationService
 {
-    Logger logger = LoggerFactory.getLogger(RegistrationService.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(RegistrationService.class);
     
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -38,7 +38,7 @@ public class AuthenticationService
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception
     {
-        logger.info("Entered login controller...");
+        LOGGER.info("Entered login controller...");
         
         // try to authenticate using authentication manager (configured in web security configuration) of spring security
         try 
@@ -53,7 +53,7 @@ public class AuthenticationService
             throw new Exception("Incorrect username or password", e);
         }
         
-        logger.debug("user email=" + authenticationRequest.getUserEmail());
+        LOGGER.debug("user email=" + authenticationRequest.getUserEmail());
         
         // if successfully authenticated - generate token and send a token
         //find user
@@ -62,10 +62,11 @@ public class AuthenticationService
         //generate token
         Date tokenExpDate = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
         final String jwtToken = jwtUtil.generateToken(user, tokenExpDate);
-        logger.debug("jwtToken=" + jwtToken);
+        LOGGER.debug("jwtToken=" + jwtToken);
         
         AuthenticationResponse authResponse = new AuthenticationResponse(jwtToken);
         authResponse.setExpDate(tokenExpDate);
+        System.out.println("user first name=" + user.getFirstName());
         authResponse.setFirstName(user.getFirstName());
         authResponse.setLastName(user.getLastName());
         
